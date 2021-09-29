@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#new_quote').click(function(){
+    $('#new_quote').click(function () {
         $.ajax({
             url: "/services/get_quote",
             type: "GET",
@@ -7,28 +7,35 @@ $(document).ready(function () {
                 // append data to your page
                 $("#quote_box").html(data['quote']);
                 $("#rating_box").html(data['rating']);
-                $("#sk-chase").hide();
+
+                if (data['did_rate'] == false) {
+                    $("#rate_value").show();
+                    $("#rate_quote").show();
+                }
             },
-            error: function(data) {
+            error: function (data) {
                 alert("There was an error processing this request");
             }
         });
     });
-    $('#rate_quote').click(function(){
-        quote_string = $("#quote_box").text();
-        dropdown_rank = $("#rank").text();
+    $('#rate_quote').click(function () {
+        var quote_string = $("#quote_box").text();
+        var dropdown_rank = $('#rate_value').find(":selected").text();
+
         $.ajax({
             url: "/services/rate_quote",
             type: "GET",
-            data:{
+            data: {
                 quote: quote_string,
                 rank: dropdown_rank
             },
             success: function (data) {
                 // append data to your page
                 $("#rating_box").html(data['rating']);
+                $("#rate_value").hide();
+                $("#rate_quote").hide();
             },
-            error: function(data) {
+            error: function (data) {
                 alert("There was an error processing this request");
             }
         });

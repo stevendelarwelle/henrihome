@@ -7,7 +7,6 @@ class SwansonQuoteService
         response = HTTParty.get('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
         #quote_str = response.body.gsub('[', '').gsub(']', '').gsub('"', '')
         quote = JSON.parse(response.body)[0]
-        puts quote
         swanson_quote = SwansonQuote.find_or_create_by(quote: quote)
         return swanson_quote
       rescue HTTParty::Error

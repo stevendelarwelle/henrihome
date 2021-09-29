@@ -4,6 +4,11 @@ class QuoteRating < ApplicationRecord
   belongs_to :swanson_quote
 
   def self.get_avg
+    #get the average
     self.count > 0 ? self.sum(:rating) / self.count : 0
+  end
+  def self.did_rate?(ip)
+    #check if this ip rated this quote
+    self.where(ip_address: ip).exists?
   end
 end

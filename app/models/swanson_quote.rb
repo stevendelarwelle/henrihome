@@ -9,7 +9,15 @@ class SwansonQuote < ApplicationRecord
     unless rated
       QuoteRating.create(swanson_quote_id: the_quote.id, ip_address: user_ip, rating: rating)
     end
-    the_quote.quote_ratings.get_avg
+    the_quote.get_average_rating
+  end
+
+  def get_average_rating
+    if self.quote_ratings.exists?
+      self.quote_ratings.average(:rating).to_s
+      else
+      "0.0"
+    end
   end
 
 end

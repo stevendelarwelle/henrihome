@@ -5,7 +5,7 @@ class QuoteRating < ApplicationRecord
 
   def self.get_avg
     #get the average
-    self.count > 0 ? (self.sum(:rating)/ self.count).to_f : 0.0
+    self.count > 0 ? (self.sum(:rating)/ self.count).to_s : '0.0'
   end
   def self.did_rate?(ip)
     #check if this ip rated this quote

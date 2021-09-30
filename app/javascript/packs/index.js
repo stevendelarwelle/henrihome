@@ -4,10 +4,11 @@ $(document).ready(function () {
         $.ajax({
             url: "/services/get_quote",
             type: "GET",
+            dataType: 'json',
             success: function (data) {
                 // append data to your page
 
-                var rating = Number.parseFloat(data['rating']).toFixed(1);
+                var rating = data['rating']
                 $("#quote_box").html(data['quote']);
                 $("#rating_box").html(rating);
                 var did_rate = data['did_rate'];
@@ -35,9 +36,10 @@ $(document).ready(function () {
                 quote: quote_string,
                 rank: dropdown_rank
             },
+            dataType: 'json',
             success: function (data) {
                 // append data to your page
-                var rating = Number.parseFloat(data['rating']).toFixed(1);
+                var rating = data['rating']
                 $("#rating_box").html(rating);
                 $("#rating_row").hide();
                 $("#rate_value").val("1");

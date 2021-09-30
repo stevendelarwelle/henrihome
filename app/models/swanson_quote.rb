@@ -16,7 +16,7 @@ class SwansonQuote < ApplicationRecord
     if self.quote_ratings.exists?
       self.quote_ratings.average(:rating).to_s
       else
-      "0.0"
+      "0"
     end
   end
 

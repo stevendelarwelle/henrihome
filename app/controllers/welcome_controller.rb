@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
   def index
     swanson_quote_service = SwansonQuoteService.new
-    puts swanson_quote_service.to_yaml
+
     if swanson_quote_service.quote.nil?
       @quote = {quote: '', rating: ''}
     else
